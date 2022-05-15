@@ -1,5 +1,5 @@
 ## Architecture
-Based off redux's typescript template using the redux toolkit to make slices. This is also using axios for the http client, matieral ui for the presentation, and io-ts for an anti-corruption layer.
+Based off redux's typescript template using the redux toolkit to make slices. This is also using axios for the http client, material ui for the presentation, and io-ts for an anti-corruption layer.
 
 ## things I'd consider to do in the future:
  - move to https: sending plain text passwords isn't great (obviously just a simplification for the coding excercise)
