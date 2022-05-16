@@ -3,7 +3,7 @@ Based off redux's typescript template using the redux toolkit to make slices. Th
 
 ## things I'd consider to do in the future:
  - move to https: sending plain text passwords isn't great (obviously just a simplification for the coding excercise)
- - testing: unit and e2e (given the limited scope of the excercise, manual testing seemed reasonable enough)
+ - testing: more unit and e2e (given the limited scope of the excercise, manual testing seemed reasonable enough for testing the presentation)
  - Internationalization: it's only in english and presumably for something public facing it should support multiple languages
  - Accessibility pass: I made some effort for screenreaders etc., but did not do a pass using one, so there are probably improvements to be made.
  - Send errors and other metrics to some dev-ops service.

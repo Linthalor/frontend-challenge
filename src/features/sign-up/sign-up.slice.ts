@@ -2,27 +2,28 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../../app/store';
 import { SignUp, SignUpUserFormValues, SignUpUserPrefsValues } from '../../model/sign-up';
 import { AsyncProp, initialAsync } from '../../model/util/async-prop';
+import { addAsyncResultToState } from '../slice-helper';
 import { postSignUp } from './sign-up.api';
 
-export interface AuthState {
+export interface SignUpState {
   signUpStatus: AsyncProp<true>,
   userFormValues: SignUpUserFormValues | null,
   userPrefsValues: SignUpUserPrefsValues | null,
 };
 
-const initialState = (): AuthState => ({
+const initialState = (): SignUpState => ({
   signUpStatus: initialAsync(),
   userFormValues: null,
   userPrefsValues: null,
 });
 
 export const singUpAsync = createAsyncThunk<true, SignUp, { state: RootState }>(
-  'auth/postSignUp',
+  'sign-up/postSignUp',
   async (SignUpData) => await postSignUp(SignUpData),
 );
 
-export const authSlice = createSlice({
-  name: 'auth',
+export const signUpSlice = createSlice({
+  name: 'sign-up',
   initialState: initialState(),
   reducers: {
     resetSignUp: () => initialState(),
@@ -34,29 +35,14 @@ export const authSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    builder
-      .addCase(singUpAsync.pending, (state) => {
-        state.signUpStatus = {
-          loading: true,
-        };
-      })
-      .addCase(singUpAsync.fulfilled, (state, action) => {
-        state.signUpStatus = {
-          value: action.payload,
-        };
-      })
-      .addCase(singUpAsync.rejected, (state, action) => {
-        state.signUpStatus = {
-          errorMessage: action.error.message || 'Failed!'
-        };
-      });
+    addAsyncResultToState('signUpStatus', singUpAsync, builder);
   }
 })
 
-export const { resetSignUp, setUserFormValues, setUserPrefsValues } = authSlice.actions;
+export const { resetSignUp, setUserFormValues, setUserPrefsValues } = signUpSlice.actions;
 
-export const selectSignUpStatus = (state: RootState) => state.auth.signUpStatus;
-export const selectUserFormValues = (state: RootState) => state.auth.userFormValues;
-export const selectUserPrefsValues = (state: RootState) => state.auth.userPrefsValues;
+export const selectSignUpStatus = (state: RootState) => state.signUp.signUpStatus;
+export const selectUserFormValues = (state: RootState) => state.signUp.userFormValues;
+export const selectUserPrefsValues = (state: RootState) => state.signUp.userPrefsValues;
 
-export const authReducer = authSlice.reducer;
+export const signUpReducer = signUpSlice.reducer;

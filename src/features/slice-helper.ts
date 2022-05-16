@@ -61,6 +61,9 @@ export const addAsyncResultAsState = <T, K, L, Q extends AsyncProp<T>>(
     TODO: FIXME: need to solve the generics of action. it isn't deducing that it is an
     error correctly
   */
-  .addCase(thunkAction.rejected, (state, action: any) => ({
-    errorMessage: action.error.message || 'failed',
-  }) as Draft<Q>);
+  .addCase(thunkAction.rejected, (state, action: any) => {
+    console.error('error', action);
+    return {
+      errorMessage: action.error.message || 'failed',
+    } as Draft<Q>;
+  });

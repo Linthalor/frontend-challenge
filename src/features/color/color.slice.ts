@@ -5,9 +5,9 @@ import { AsyncProp, initialAsync } from '../../model/util/async-prop';
 import { addAsyncResultAsState } from '../slice-helper';
 import { getColors } from './color.api';
 
-export type AuthState = AsyncProp<Color[]>;
+export type ColorState = AsyncProp<Color[]>;
 
-const initialState: AuthState = initialAsync() as AuthState;
+const initialState: ColorState = initialAsync() as ColorState;
 
 export const getColorsAsync = createAsyncThunk<Color[], void, { state: RootState }>(
   'colors/get',
