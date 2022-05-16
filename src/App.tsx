@@ -2,7 +2,7 @@ import { Navigate, Routes, Route } from 'react-router-dom';
 import { SignUp } from './pages/sign-up';
 import { AdditionalInfo } from './pages/additional-info';
 import { Confirmation } from './pages/confirmation';
-import { SignupResult } from './pages/signup-result';
+import { SignupResult } from './pages/sign-up-result';
 import { RequireSignUp } from './components/require-sign-up';
 import { RequireSignUpError } from './components/require-sign-up-error';
 

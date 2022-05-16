@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`sign-up-result page renders as expected on failure 1`] = `
+<div
+  class="MuiBox-root css-1jpcp03"
+>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vfmm4m-MuiPaper-root-MuiCard-root"
+  >
+    <div
+      class="MuiCardContent-root css-jewu2s-MuiCardContent-root"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-9vlyci-MuiTypography-root"
+      >
+        Error
+      </h5>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-156h3p7-MuiTypography-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-colorError MuiSvgIcon-fontSizeLarge css-104vmwh-MuiSvgIcon-root"
+          data-testid="ErrorIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
+          />
+        </svg>
+        Uh oh, something went wrong. Please try again later.
+      </p>
+    </div>
+    <div
+      class="MuiCardActions-root MuiCardActions-spacing css-1lljpoj-MuiCardActions-root"
+    >
+      <button
+        class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1ppzino-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="submit"
+      >
+        Restart
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`sign-up-result page renders as expected on success 1`] = `
+<div
+  class="MuiBox-root css-1jpcp03"
+>
+  <div
+    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vfmm4m-MuiPaper-root-MuiCard-root"
+  >
+    <div
+      class="MuiCardContent-root css-jewu2s-MuiCardContent-root"
+    >
+      <h5
+        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-9vlyci-MuiTypography-root"
+      >
+        Success!
+      </h5>
+      <p
+        class="MuiTypography-root MuiTypography-body1 css-156h3p7-MuiTypography-root"
+      >
+        <svg
+          aria-hidden="true"
+          class="MuiSvgIcon-root MuiSvgIcon-colorPrimary MuiSvgIcon-fontSizeLarge css-2s4ihf-MuiSvgIcon-root"
+          data-testid="CheckIcon"
+          focusable="false"
+          viewBox="0 0 24 24"
+        >
+          <path
+            d="M9 16.17 4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"
+          />
+        </svg>
+        You should receive a confirmation email soon.
+      </p>
+    </div>
+    <div
+      class="MuiCardActions-root MuiCardActions-spacing css-1lljpoj-MuiCardActions-root"
+    >
+      <button
+        class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1ppzino-MuiButtonBase-root-MuiButton-root"
+        tabindex="0"
+        type="submit"
+      >
+        Restart
+        <span
+          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
+        />
+      </button>
+    </div>
+  </div>
+</div>
+`;
