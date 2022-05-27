@@ -24,7 +24,7 @@ import { isError, isLoading, isValue } from '../model/util/async-prop';
 import { isTrue } from '../validators/is-true.validator';
 import { TermsAndConditions, TermsAndConditionsRef } from '../components/terms-and-conditions';
 
-type SignUpPrefsormErrors = {
+type SignUpPrefsFormErrors = {
   [K in keyof SignUpUserPrefsValues]?: string;
 };
 
@@ -78,7 +78,7 @@ export const AdditionalInfo = () => {
     setFormValues(prev => ({...prev, [key]: { value: event.target.checked, dirty: true }}));
   };
 
-  const formValidationErrors = useMemo<SignUpPrefsormErrors>(() => ({
+  const formValidationErrors = useMemo<SignUpPrefsFormErrors>(() => ({
     ...(formValues.color.dirty && (
       required('color', formValues.color.value)
     )),
