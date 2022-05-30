@@ -1,22 +1,25 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`sign-up-result page renders as expected on failure 1`] = `
-<div
-  class="MuiBox-root css-1jpcp03"
+exports[`SignupResult renders as expected on failure 1`] = `
+<mocked-mui-box
+  sx="{\\"width\\":\\"100%\\",\\"height\\":\\"100%\\",\\"display\\":\\"flex\\",\\"justifyContent\\":\\"center\\",\\"alignItems\\":\\"center\\"}"
 >
-  <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vfmm4m-MuiPaper-root-MuiCard-root"
+  <mocked-mui-card
+    sx="{\\"width\\":400,\\"height\\":\\"unset\\",\\"display\\":\\"flex\\",\\"flexDirection\\":\\"column\\",\\"justifyContent\\":\\"center\\"}"
   >
-    <div
-      class="MuiCardContent-root css-jewu2s-MuiCardContent-root"
+    <mocked-mui-card-content
+      sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"column\\",\\"alignItems\\":\\"stretch\\",\\"justifyContent\\":\\"start\\",\\"gap\\":1,\\"flex\\":1}"
     >
-      <h5
-        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-9vlyci-MuiTypography-root"
+      <mocked-mui-typography
+        color="text.primary"
+        gutterbottom="true"
+        sx="{\\"textAlign\\":\\"center\\",\\"fontWeight\\":\\"bold\\"}"
+        variant="h5"
       >
-        Error
-      </h5>
-      <p
-        class="MuiTypography-root MuiTypography-body1 css-156h3p7-MuiTypography-root"
+        Error!
+      </mocked-mui-typography>
+      <mocked-mui-typography
+        sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"row\\",\\"alignItems\\":\\"center\\"}"
       >
         <svg
           aria-hidden="true"
@@ -30,43 +33,42 @@ exports[`sign-up-result page renders as expected on failure 1`] = `
           />
         </svg>
         Uh oh, something went wrong. Please try again later.
-      </p>
-    </div>
-    <div
-      class="MuiCardActions-root MuiCardActions-spacing css-1lljpoj-MuiCardActions-root"
+      </mocked-mui-typography>
+    </mocked-mui-card-content>
+    <mocked-mui-card-actions
+      sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"row\\",\\"justifyContent\\":\\"end\\",\\"gap\\":1}"
     >
-      <button
-        class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1ppzino-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
+      <mocked-mui-button
         type="submit"
+        variant="contained"
       >
         Restart
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </button>
-    </div>
-  </div>
-</div>
+      </mocked-mui-button>
+    </mocked-mui-card-actions>
+  </mocked-mui-card>
+</mocked-mui-box>
 `;
 
-exports[`sign-up-result page renders as expected on success 1`] = `
-<div
-  class="MuiBox-root css-1jpcp03"
+exports[`SignupResult renders as expected on success 1`] = `
+<mocked-mui-box
+  sx="{\\"width\\":\\"100%\\",\\"height\\":\\"100%\\",\\"display\\":\\"flex\\",\\"justifyContent\\":\\"center\\",\\"alignItems\\":\\"center\\"}"
 >
-  <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vfmm4m-MuiPaper-root-MuiCard-root"
+  <mocked-mui-card
+    sx="{\\"width\\":400,\\"height\\":\\"unset\\",\\"display\\":\\"flex\\",\\"flexDirection\\":\\"column\\",\\"justifyContent\\":\\"center\\"}"
   >
-    <div
-      class="MuiCardContent-root css-jewu2s-MuiCardContent-root"
+    <mocked-mui-card-content
+      sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"column\\",\\"alignItems\\":\\"stretch\\",\\"justifyContent\\":\\"start\\",\\"gap\\":1,\\"flex\\":1}"
     >
-      <h5
-        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-9vlyci-MuiTypography-root"
+      <mocked-mui-typography
+        color="text.primary"
+        gutterbottom="true"
+        sx="{\\"textAlign\\":\\"center\\",\\"fontWeight\\":\\"bold\\"}"
+        variant="h5"
       >
         Success!
-      </h5>
-      <p
-        class="MuiTypography-root MuiTypography-body1 css-156h3p7-MuiTypography-root"
+      </mocked-mui-typography>
+      <mocked-mui-typography
+        sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"row\\",\\"alignItems\\":\\"center\\"}"
       >
         <svg
           aria-hidden="true"
@@ -80,22 +82,18 @@ exports[`sign-up-result page renders as expected on success 1`] = `
           />
         </svg>
         You should receive a confirmation email soon.
-      </p>
-    </div>
-    <div
-      class="MuiCardActions-root MuiCardActions-spacing css-1lljpoj-MuiCardActions-root"
+      </mocked-mui-typography>
+    </mocked-mui-card-content>
+    <mocked-mui-card-actions
+      sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"row\\",\\"justifyContent\\":\\"end\\",\\"gap\\":1}"
     >
-      <button
-        class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root  css-1ppzino-MuiButtonBase-root-MuiButton-root"
-        tabindex="0"
+      <mocked-mui-button
         type="submit"
+        variant="contained"
       >
         Restart
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </button>
-    </div>
-  </div>
-</div>
+      </mocked-mui-button>
+    </mocked-mui-card-actions>
+  </mocked-mui-card>
+</mocked-mui-box>
 `;

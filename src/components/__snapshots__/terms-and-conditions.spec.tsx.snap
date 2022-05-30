@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TermsAndConditions renders as expected closed 1`] = `null`;
+
+exports[`TermsAndConditions renders as expected open 1`] = `null`;
+
+exports[`TermsAndConditions renders as expected open 2`] = `null`;

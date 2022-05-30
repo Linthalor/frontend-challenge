@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUpCard renders as expected 1`] = `
+<mocked-mui-box
+  sx="{\\"width\\":\\"100%\\",\\"height\\":\\"100%\\",\\"display\\":\\"flex\\",\\"justifyContent\\":\\"center\\",\\"alignItems\\":\\"center\\"}"
+>
+  <mocked-mui-card
+    sx="{\\"width\\":400,\\"height\\":\\"unset\\",\\"display\\":\\"flex\\",\\"flexDirection\\":\\"column\\",\\"justifyContent\\":\\"center\\"}"
+  >
+    <mocked-mui-card-content
+      sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"column\\",\\"alignItems\\":\\"stretch\\",\\"justifyContent\\":\\"start\\",\\"gap\\":1,\\"flex\\":1}"
+    >
+      <mocked-content />
+    </mocked-mui-card-content>
+    <mocked-mui-card-actions
+      sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"row\\",\\"justifyContent\\":\\"end\\",\\"gap\\":1}"
+    >
+      <mocked-actions />
+    </mocked-mui-card-actions>
+  </mocked-mui-card>
+</mocked-mui-box>
+`;

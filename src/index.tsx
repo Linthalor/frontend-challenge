@@ -1,10 +1,11 @@
 import React from 'react';
+import './i18n'; // Keep this before any app imports so it is available.
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { ThemeProvider } from '@mui/material';
 import { store } from './app/store';
-import App from './App';
+import App from './app';
 import reportWebVitals from './reportWebVitals';
 import './index.css';
 import { theme } from './app/theme';

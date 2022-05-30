@@ -3,104 +3,62 @@ import {
   Button,
   Checkbox,
   CircularProgress,
+  FormControl,
   FormControlLabel,
+  FormHelperText,
   InputAdornment,
+  InputLabel,
   MenuItem,
+  Select,
   Skeleton,
-  TextField,
   Typography,
 } from '@mui/material';
-import { ChangeEvent, FormEvent, useEffect, useMemo, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../app/hooks';
 import { SignUpCard } from '../components/signup-card';
 import { selectUserPrefsValues, setUserPrefsValues } from '../features/sign-up/sign-up.slice';
-import { SignUpUserPrefsValues } from '../model/sign-up';
-import { mapValues } from 'lodash';
-import { required } from '../validators/required.validator';
-import { getColorsAsync, selectColors } from '../features/color/color.slice';
+import { SignUpUserPrefsValues, SignUpUserPrefsValuesSchema } from '../model/sign-up';
 import { useSelector } from 'react-redux';
 import { isError, isLoading, isValue } from '../model/util/async-prop';
-import { isTrue } from '../validators/is-true.validator';
 import { TermsAndConditions, TermsAndConditionsRef } from '../components/terms-and-conditions';
-
-type SignUpPrefsFormErrors = {
-  [K in keyof SignUpUserPrefsValues]?: string;
-};
-
-type SignUpPrefsForm = {
-  [K in keyof SignUpUserPrefsValues]: {
-    value: SignUpUserPrefsValues[K],
-    dirty: boolean,
-  };
-};
+import { useTranslation } from 'react-i18next';
+import { Controller, useForm, } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { getColorsAsync, selectColors } from '../features/color/color.slice';
 
 export const AdditionalInfo = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-  const signUpPrefsData = useSelector(selectUserPrefsValues);
-  const [formValues, setFormValues] = useState<SignUpPrefsForm>({
-    color: {
-      value: signUpPrefsData?.color || '',
-      dirty: signUpPrefsData?.color ? true : false,
-    },
-    terms: {
-      value: signUpPrefsData?.terms ? signUpPrefsData.terms : false,
-      dirty: signUpPrefsData?.terms ? true : false,
-    },
-  });
+  const { t } = useTranslation();
   const colors = useSelector(selectColors);
   const termsRef = useRef<TermsAndConditionsRef | null>(null);
+  const signUpPrefsData = useSelector(selectUserPrefsValues);
 
   useEffect(() => {
     /*
       This could potentially be moved to a higher level so it fetches at app load and
-      not every time this section of the form is visited. For the sake of demoing
-      the async nature of colors, it will be left as is.
+      not every time this section of the form is visited, or use a caching strategy
+      to prevent reloading it if it's not been updated.
+      
+      For the sake of demoing the async nature of colors, it will be left as is.
      */
     dispatch(getColorsAsync());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const setValue = (
-    key: keyof SignUpUserPrefsValues
-  ) => (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormValues(prev => ({...prev, [key]: { value: event.target.value, dirty: true }}));
-  };
+  const { handleSubmit, register, formState, control, watch } = useForm({
+    resolver: zodResolver(SignUpUserPrefsValuesSchema),
+    mode: 'onChange',
+    defaultValues: {
+      color: signUpPrefsData?.color || '',
+      terms: signUpPrefsData?.terms || false,
+    },
+  });
+  const { errors } = formState;
 
-  const setCheckboxValue = (
-    key: keyof SignUpUserPrefsValues
-  ) => (
-    event: ChangeEvent<HTMLInputElement>
-  ) => {
-    setFormValues(prev => ({...prev, [key]: { value: event.target.checked, dirty: true }}));
-  };
-
-  const formValidationErrors = useMemo<SignUpPrefsFormErrors>(() => ({
-    ...(formValues.color.dirty && (
-      required('color', formValues.color.value)
-    )),
-    ...(formValues.terms.dirty && (
-      isTrue(
-        'terms',
-        formValues.terms.value,
-        'You must agree to the Terms & Conditions to continue.'
-      )
-    )),
-  }), [formValues]);
-  const invalidForm = useMemo(() => {
-    const formFields = Object.values(formValues);
-    return Object.keys(formValidationErrors).length > 0
-      || formFields.filter(field => field.dirty).length !== formFields.length; 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formValidationErrors]); // Intentially not depending on formValues
-
-  const submitForm = (event: FormEvent) => {
-    event.preventDefault();
-    const userFormValues = mapValues(formValues, (value) => value.value) as SignUpUserPrefsValues;
-    dispatch(setUserPrefsValues(userFormValues));
+  const submitForm = (values: SignUpUserPrefsValues) => {
+    dispatch(setUserPrefsValues(values));
     navigate('/confirmation');
   }
 
@@ -110,7 +68,7 @@ export const AdditionalInfo = () => {
         height: '100%',
         width: '100%',
       }}
-      onSubmit={submitForm}
+      onSubmit={handleSubmit(submitForm)}
     >
       <SignUpCard
         content={<>
@@ -123,42 +81,44 @@ export const AdditionalInfo = () => {
             color="text.primary"
             gutterBottom
           >
-            Additional Info
+            {t('page:additionalInfo:label')}
           </Typography>
-          <TextField
-            id="favorite-color-select-field"
-            label="Favorite Color"
-            variant="outlined"
-            select
-            value={formValues.color.value}
-            error={!!formValidationErrors.color || isError(colors)}
-            helperText={formValidationErrors.color
-              || (isError(colors) && 'Failed to load colors.')
-              || ' '
-            }
-            onChange={setValue('color')}
-            required
-            InputProps={{
-              ...(isLoading(colors) && {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <CircularProgress size={16} />
-                  </InputAdornment>
-                )
-              })
-            }}
-          >
-              {isLoading(colors) && [1,2,3,4,5].map(id => 
-                <MenuItem key={id} disabled>
-                  <Skeleton variant='text' sx={{width: '100%'}}/>
-                </MenuItem>
-              )}
-              {isError(colors) && <MenuItem disabled>Failed to load colors.</MenuItem>}
-              {isValue(colors) && colors.value.map(color =>
-                <MenuItem key={color} value={color}>{color}</MenuItem>
-              )}
-          </TextField>
+          <Controller
+            name="color"
+            control={control}
+            render={({ field }) => (
+              <FormControl error={!!errors.color?.message}>
+                <InputLabel id="favorite-color-select-field-label" required>{t('form:color:label')}</InputLabel>
+                <Select
+                  id="favorite-color-select-field"
+                  label={t('form:color:label')}
+                  required
+                  endAdornment={isLoading(colors) && (
+                    <InputAdornment position="end" sx={{ mr: '-7px' }}>
+                      <CircularProgress size={24} />
+                    </InputAdornment>
+                  )}
+                  {...field}
+                >
+                  {isLoading(colors) && <MenuItem value={watch('color')}>{watch('color')}</MenuItem>}
+                  {isLoading(colors) && [1,2,3,4,5].map(id => 
+                    <MenuItem key={id} disabled>
+                      <Skeleton variant='text' sx={{width: '100%'}}/>
+                    </MenuItem>
+                  )}
+                  {isError(colors) && <MenuItem disabled>{t('form:color:errors:failed_async')}</MenuItem>}
+                  {isValue(colors) && colors.value.map(color =>
+                    <MenuItem key={color} value={color}>{color}</MenuItem>
+                  )}
+                </Select>
+                <FormHelperText>{errors.color?.message}</FormHelperText>
+              </FormControl>
+            )}
+          />
           <FormControlLabel
+            control={
+              <Checkbox {...register('terms')} checked={watch('terms')} />
+            }
             label={
               <Box
                 sx={{
@@ -167,26 +127,23 @@ export const AdditionalInfo = () => {
                   alignItems: 'center'
                 }}
               >
-                <Typography>I Agree to</Typography>
+                <Typography>{t('common:terms:agree')}</Typography>
                 <Button
                   onClick={() => termsRef.current?.setOpenTerms(true)}
                 >
-                  Terms & Conditions
+                  {t('common:terms:termsAndConditions')}
                 </Button>
               </Box>
-            }
-            control={
-              <Checkbox
-                checked={formValues.terms.value}
-                onChange={setCheckboxValue('terms')}
-                inputProps={{ 'aria-label': 'controlled' }}
-              />
             }
           />
         </>}
         actions={<>
-          <Button variant="outlined" color="secondary" component={Link} to="/sign-up">Back</Button>
-          <Button variant="contained" type="submit" disabled={invalidForm}>Next</Button>
+          <Button variant="outlined" color="secondary" component={Link} to="/sign-up">
+            {t('common:back')}
+          </Button>
+          <Button variant="contained" type="submit" disabled={!formState.isValid}>
+            {t('common:next')}
+          </Button>
         </>}
       />
       <TermsAndConditions ref={termsRef}/>

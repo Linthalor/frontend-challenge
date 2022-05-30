@@ -17,3 +17,8 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+
+.MuiInputBase-formControl:not(.Mui-error) {
+  margin-bottom: calc(3px + 1.66 * 12px);
+}

@@ -1,11 +1,13 @@
 import { Check, Error } from '@mui/icons-material';
 import { Button, Typography } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../app/hooks';
 import { SignUpCard } from '../components/signup-card';
 import { resetSignUp } from '../features/sign-up/sign-up.slice';
 
 export const SignupResult = ({ success }: { success?: true }) => {
   const dispatch = useAppDispatch();
+  const { t } = useTranslation();
 
   const restart = () => {
     dispatch(resetSignUp());
@@ -23,21 +25,20 @@ export const SignupResult = ({ success }: { success?: true }) => {
           color="text.primary"
           gutterBottom
         >
-          {success ? 'Success!' : 'Error'}
+          {t(`page:signUpResult:${success ? 'success' : 'error'}:label`)}
         </Typography>
         <Typography sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center' }}>
           {success 
             ? <Check fontSize="large" color="primary" sx={{ mr: 1 }} />
             : <Error fontSize="large" color="error" sx={{ mr: 1 }} />
           }
-          {success
-            ? 'You should receive a confirmation email soon.'
-            : 'Uh oh, something went wrong. Please try again later.'
-          }
+          {t(`page:signUpResult:${success ? 'success' : 'error'}:message`)}
         </Typography>
       </>}
       actions={<>
-        <Button variant="contained" type="submit" onClick={restart}>Restart</Button>
+        <Button variant="contained" type="submit" onClick={restart}>
+          {t('common:restart')}
+        </Button>
       </>}
     />
   </>;

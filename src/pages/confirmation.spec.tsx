@@ -1,12 +1,18 @@
 import { cleanup, render } from '@testing-library/react';
 import { Provider } from 'react-redux';
-import { store } from '../app/store';
+import { createTestStore, store as realStore } from '../app/store';
 import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import { theme } from '../app/theme';
 import { Confirmation } from './confirmation';
 
-describe('confirmation page', () => {
+jest.mock('@mui/material');
+
+describe('Confirmation', () => {
+  let store: typeof realStore;
+  beforeEach(() => {
+    store = createTestStore();
+  });
   afterEach(() => {
     cleanup();
   });

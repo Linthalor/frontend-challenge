@@ -4,10 +4,9 @@ Based off redux's typescript template using the redux toolkit to make slices. Th
 ## things I'd consider to do in the future:
  - move to https: sending plain text passwords isn't great (obviously just a simplification for the coding excercise)
  - testing: e2e (while there are unit tests and snapshot tests there is currently nothing check that the sign up flow actually works as a whole)
- - Internationalization: it's only in english and presumably for something public facing it should support multiple languages
  - Accessibility pass: I made some effort for screenreaders etc., but did not do a pass using one, so there are probably improvements to be made.
  - Send errors and other metrics to some dev-ops service.
- - Potentially refactor the form to cover the whole login process, such that it could just submit at the end instead of having a submission at each step, might make browser save password notifications more cleaner.
+ - Potentially refactor the form to cover the whole login process, such that it could just submit at the end instead of having a submission at each step, might make browser save password notifications more cleaner (use '/' to host the login card and then subroutes for the content).
  - Explore animated transitions between the login pages, signup loading indicator, and the result.
  - Could route guard each step of the signup form to require the form data up until that point. At the moment only the signup result is guarded and seems suficient.
  - Add in better password validators, such as requiring special characters and numbers.

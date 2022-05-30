@@ -8,13 +8,14 @@ import {
   Typography,
 } from '@mui/material';
 import { Link, useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 import { useAppDispatch } from '../app/hooks';
 import { SignUpCard } from '../components/signup-card';
 import {
   selectSignUpStatus,
   selectUserFormValues,
   selectUserPrefsValues,
-  singUpAsync,
+  signUpAsync,
 } from '../features/sign-up/sign-up.slice';
 import { useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
@@ -23,7 +24,8 @@ import { Error } from '@mui/icons-material';
 
 export const Confirmation = () => {
   const dispatch = useAppDispatch();
-  const navigate = useNavigate();  
+  const navigate = useNavigate();
+  const { t } = useTranslation();
   const signUpUserData = useSelector(selectUserFormValues);
   const signUpPrefsData = useSelector(selectUserPrefsValues);
   const signUpStatus = useSelector(selectSignUpStatus);
@@ -31,7 +33,7 @@ export const Confirmation = () => {
 
   const onSubmit = () => {
     if (signUpUserData && signUpPrefsData) {
-      dispatch(singUpAsync({
+      dispatch(signUpAsync({
         ...signUpUserData,
         ...signUpPrefsData,
       }))
@@ -72,11 +74,11 @@ export const Confirmation = () => {
           color="text.primary"
           gutterBottom
         >
-          Confirmation
+          {t('page:confirmation:label')}
         </Typography>
         <TextField
           id="first-name-confirmation-field"
-          label="First Name"
+          label={t('form:name:label')}
           variant="outlined"
           type="text"
           value={signUpUserData?.name}
@@ -86,7 +88,7 @@ export const Confirmation = () => {
         />
         <TextField
           id="email-confirmation-field"
-          label="Email"
+          label={t('form:email:label')}
           variant="outlined"
           type="email"
           value={signUpUserData?.email}
@@ -100,7 +102,7 @@ export const Confirmation = () => {
         */}
         {/* <TextField
           id="password-confirmation-field"
-          label="Password"
+          label={t('form:password:label')}
           variant="outlined"
           type="password"
           value={signUpUserData?.password}
@@ -109,7 +111,7 @@ export const Confirmation = () => {
         /> */}
         <TextField
           id="favorite-color-confirmation-field"
-          label="Favorite Color"
+          label={t('form:color:label')}
           variant="outlined"
           type="text"
           value={signUpPrefsData?.color}
@@ -128,7 +130,11 @@ export const Confirmation = () => {
                   alignItems: 'center'
                 }}
               >
-                <Typography>I Agree to Terms & Conditions</Typography>
+                <Typography>
+                  {t('common:terms:agree')}
+                  {' '}
+                  {t('common:terms:termsAndConditions')}
+                </Typography>
               </Box>
             }
             control={
@@ -141,14 +147,16 @@ export const Confirmation = () => {
         </Box>
       </>}
       actions={<>
-        <Button variant='outlined' color='secondary' component={Link} to="/more-info">Back</Button>
+        <Button variant='outlined' color='secondary' component={Link} to="/more-info">
+          {t('common:back')}
+        </Button>
         <Button
           variant="contained"
           type="submit"
           disabled={!signUpUserData || !signUpPrefsData}
           onClick={onSubmit}
         >
-          Submit
+          {t('common:submit')}
         </Button>
       </>}
     />

@@ -1,133 +1,52 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`confirmation page renders as expected 1`] = `
-<div
-  class="MuiBox-root css-1jpcp03"
+exports[`Confirmation renders as expected 1`] = `
+<mocked-mui-box
+  sx="{\\"width\\":\\"100%\\",\\"height\\":\\"100%\\",\\"display\\":\\"flex\\",\\"justifyContent\\":\\"center\\",\\"alignItems\\":\\"center\\"}"
 >
-  <div
-    class="MuiPaper-root MuiPaper-elevation MuiPaper-rounded MuiPaper-elevation1 MuiCard-root css-1vfmm4m-MuiPaper-root-MuiCard-root"
+  <mocked-mui-card
+    sx="{\\"width\\":400,\\"height\\":\\"unset\\",\\"display\\":\\"flex\\",\\"flexDirection\\":\\"column\\",\\"justifyContent\\":\\"center\\"}"
   >
-    <div
-      class="MuiCardContent-root css-jewu2s-MuiCardContent-root"
+    <mocked-mui-card-content
+      sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"column\\",\\"alignItems\\":\\"stretch\\",\\"justifyContent\\":\\"start\\",\\"gap\\":1,\\"flex\\":1}"
     >
-      <h5
-        class="MuiTypography-root MuiTypography-h5 MuiTypography-gutterBottom css-9vlyci-MuiTypography-root"
+      <mocked-mui-typography
+        color="text.primary"
+        gutterbottom="true"
+        sx="{\\"textAlign\\":\\"center\\",\\"fontWeight\\":\\"bold\\"}"
+        variant="h5"
       >
         Confirmation
-      </h5>
-      <div
+      </mocked-mui-typography>
+      <mocked-mui-text-field
         aria-readonly="true"
-        class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
-      >
-        <label
-          class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary Mui-disabled Mui-error css-zq33gc-MuiFormLabel-root-MuiInputLabel-root"
-          data-shrink="false"
-          for="first-name-confirmation-field"
-          id="first-name-confirmation-field-label"
-        >
-          First Name
-        </label>
-        <div
-          class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-disabled Mui-error MuiInputBase-formControl css-1kka5ew-MuiInputBase-root-MuiOutlinedInput-root"
-        >
-          <input
-            aria-invalid="true"
-            class="MuiOutlinedInput-input MuiInputBase-input Mui-disabled css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-            disabled=""
-            id="first-name-confirmation-field"
-            type="text"
-            value=""
-          />
-          <fieldset
-            aria-hidden="true"
-            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-          >
-            <legend
-              class="css-1ftyaf0"
-            >
-              <span>
-                First Name
-              </span>
-            </legend>
-          </fieldset>
-        </div>
-      </div>
-      <div
+        disabled="true"
+        error="true"
+        id="first-name-confirmation-field"
+        label="First Name"
+        type="text"
+        variant="outlined"
+      />
+      <mocked-mui-text-field
         aria-readonly="true"
-        class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
-      >
-        <label
-          class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary Mui-disabled Mui-error css-zq33gc-MuiFormLabel-root-MuiInputLabel-root"
-          data-shrink="false"
-          for="email-confirmation-field"
-          id="email-confirmation-field-label"
-        >
-          Email
-        </label>
-        <div
-          class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-disabled Mui-error MuiInputBase-formControl css-1kka5ew-MuiInputBase-root-MuiOutlinedInput-root"
-        >
-          <input
-            aria-invalid="true"
-            class="MuiOutlinedInput-input MuiInputBase-input Mui-disabled css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-            disabled=""
-            id="email-confirmation-field"
-            type="email"
-            value=""
-          />
-          <fieldset
-            aria-hidden="true"
-            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-          >
-            <legend
-              class="css-1ftyaf0"
-            >
-              <span>
-                Email
-              </span>
-            </legend>
-          </fieldset>
-        </div>
-      </div>
-      <div
+        disabled="true"
+        error="true"
+        id="email-confirmation-field"
+        label="Email"
+        type="email"
+        variant="outlined"
+      />
+      <mocked-mui-text-field
         aria-readonly="true"
-        class="MuiFormControl-root MuiTextField-root css-1u3bzj6-MuiFormControl-root-MuiTextField-root"
-      >
-        <label
-          class="MuiInputLabel-root MuiInputLabel-formControl MuiInputLabel-animated MuiInputLabel-outlined MuiFormLabel-root MuiFormLabel-colorPrimary Mui-disabled Mui-error css-zq33gc-MuiFormLabel-root-MuiInputLabel-root"
-          data-shrink="false"
-          for="favorite-color-confirmation-field"
-          id="favorite-color-confirmation-field-label"
-        >
-          Favorite Color
-        </label>
-        <div
-          class="MuiOutlinedInput-root MuiInputBase-root MuiInputBase-colorPrimary Mui-disabled Mui-error MuiInputBase-formControl css-1kka5ew-MuiInputBase-root-MuiOutlinedInput-root"
-        >
-          <input
-            aria-invalid="true"
-            class="MuiOutlinedInput-input MuiInputBase-input Mui-disabled css-1t8l2tu-MuiInputBase-input-MuiOutlinedInput-input"
-            disabled=""
-            id="favorite-color-confirmation-field"
-            type="text"
-            value=""
-          />
-          <fieldset
-            aria-hidden="true"
-            class="MuiOutlinedInput-notchedOutline css-1d3z3hw-MuiOutlinedInput-notchedOutline"
-          >
-            <legend
-              class="css-1ftyaf0"
-            >
-              <span>
-                Favorite Color
-              </span>
-            </legend>
-          </fieldset>
-        </div>
-      </div>
-      <div
-        class="MuiBox-root css-u4p24i"
+        disabled="true"
+        error="true"
+        id="favorite-color-confirmation-field"
+        label="Favorite Color"
+        type="text"
+        variant="outlined"
+      />
+      <mocked-mui-box
+        sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"row\\",\\"alignItems\\":\\"center\\"}"
       >
         <svg
           aria-hidden="true"
@@ -169,41 +88,38 @@ exports[`confirmation page renders as expected 1`] = `
           <span
             class="MuiTypography-root MuiTypography-body1 MuiFormControlLabel-label Mui-disabled css-ahj2mt-MuiTypography-root"
           >
-            <div
-              class="MuiBox-root css-u4p24i"
+            <mocked-mui-box
+              sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"row\\",\\"alignItems\\":\\"center\\"}"
             >
-              <p
-                class="MuiTypography-root MuiTypography-body1 css-ahj2mt-MuiTypography-root"
-              >
-                I Agree to Terms & Conditions
-              </p>
-            </div>
+              <mocked-mui-typography>
+                I Agree to the
+                 
+                Terms & Conditions
+              </mocked-mui-typography>
+            </mocked-mui-box>
           </span>
         </label>
-      </div>
-    </div>
-    <div
-      class="MuiCardActions-root MuiCardActions-spacing css-1lljpoj-MuiCardActions-root"
+      </mocked-mui-box>
+    </mocked-mui-card-content>
+    <mocked-mui-card-actions
+      sx="{\\"display\\":\\"flex\\",\\"flexDirection\\":\\"row\\",\\"justifyContent\\":\\"end\\",\\"gap\\":1}"
     >
-      <a
-        class="MuiButton-root MuiButton-outlined MuiButton-outlinedSecondary MuiButton-sizeMedium MuiButton-outlinedSizeMedium MuiButtonBase-root  css-1ebchz5-MuiButtonBase-root-MuiButton-root"
-        href="/more-info"
-        tabindex="0"
+      <mocked-mui-button
+        color="secondary"
+        component="[object Object]"
+        to="/more-info"
+        variant="outlined"
       >
         Back
-        <span
-          class="MuiTouchRipple-root css-8je8zh-MuiTouchRipple-root"
-        />
-      </a>
-      <button
-        class="MuiButton-root MuiButton-contained MuiButton-containedPrimary MuiButton-sizeMedium MuiButton-containedSizeMedium MuiButtonBase-root Mui-disabled  css-1ppzino-MuiButtonBase-root-MuiButton-root"
-        disabled=""
-        tabindex="-1"
+      </mocked-mui-button>
+      <mocked-mui-button
+        disabled="true"
         type="submit"
+        variant="contained"
       >
         Submit
-      </button>
-    </div>
-  </div>
-</div>
+      </mocked-mui-button>
+    </mocked-mui-card-actions>
+  </mocked-mui-card>
+</mocked-mui-box>
 `;

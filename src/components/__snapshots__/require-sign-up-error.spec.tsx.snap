@@ -1,0 +1,10 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`RequireSignUpError should display the children with failed signup status 1`] = `<mock-children />`;
+
+exports[`RequireSignUpError should try to redirect without a signup status 1`] = `
+<mocked-react-router-dom-navigate
+  replace="true"
+  to="mock-route"
+/>
+`;

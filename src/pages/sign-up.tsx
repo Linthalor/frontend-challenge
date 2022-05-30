@@ -1,76 +1,36 @@
-import { Button, InputAdornment, TextField, Typography } from '@mui/material';
-import { useMemo } from 'react';
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { Box, Button, IconButton, InputAdornment, TextField, Typography } from '@mui/material';
 import { SignUpCard } from '../components/signup-card';
-import { SignUpUserFormValues } from '../model/sign-up';
-import { required } from '../validators/required.validator';
-import { requiredLength } from '../validators/required-length.validator';
-import { email } from '../validators/email.validator';
+import { SignUpUserFormValues, SignUpUserFormValuesSchema } from '../model/sign-up';
 import { useAppDispatch } from '../app/hooks';
 import { selectUserFormValues, setUserFormValues } from '../features/sign-up/sign-up.slice';
 import { useNavigate } from 'react-router-dom';
-import { mapValues } from 'lodash';
+import {zodResolver} from '@hookform/resolvers/zod';
 import { useSelector } from 'react-redux';
-import { EmailRounded, LockRounded } from '@mui/icons-material';
-
-type SignUpUserFormErrors = {
-  [K in keyof SignUpUserFormValues]?: string
-}
-
-type SignUpUserForm = {
-  [K in keyof SignUpUserFormValues]: {
-    value: SignUpUserFormValues[K],
-    dirty: boolean,
-  }
-}
+import { EmailRounded, Visibility, VisibilityOff } from '@mui/icons-material';
+import { useForm } from 'react-hook-form';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 export const SignUp = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const signUpUserData = useSelector(selectUserFormValues);
-  const [formValues, setFormValues] = useState<SignUpUserForm>({
-    name: {
-      value: signUpUserData?.name || '',
-      dirty: signUpUserData?.name ? true : false,
+  const [seePassword, setSeePassword] = useState(false);
+
+  const { handleSubmit, register, formState } = useForm({
+    resolver: zodResolver(SignUpUserFormValuesSchema),
+    mode: 'onBlur',
+    defaultValues: {
+      name: signUpUserData?.name || '',
+      email: signUpUserData?.email || '',
+      password: signUpUserData?.password || '',
     },
-    email: {
-      value: signUpUserData?.email || '',
-      dirty: signUpUserData?.email ? true : false,
-    },
-    password: {
-      value: signUpUserData?.password || '',
-      dirty: signUpUserData?.password ? true : false,
-    }
   });
+  const { errors } = formState;
 
-  const setValue = (key: keyof SignUpUserFormValues) => (
-    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setFormValues(prev => ({...prev, [key]: { value: event.target.value, dirty: true }}));
-  }
-
-  const formValidationErrors = useMemo<SignUpUserFormErrors>(() => ({
-    ...(formValues.name.dirty && required('name', formValues.name.value)),
-    ...(formValues.email.dirty && (
-      required('email', formValues.email.value)
-      || email('email', formValues.email.value))
-    ),
-    ...(formValues.password.dirty && (
-      required('password', formValues.password.value)
-      || requiredLength('password', formValues.password.value, 8))
-    ),
-  }), [formValues]);
-  const invalidForm = useMemo(() => {
-    const formFields = Object.values(formValues);
-    return Object.keys(formValidationErrors).length > 0
-      || formFields.filter(field => field.dirty).length !== formFields.length;
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [formValidationErrors]); // Intentially not depending on formValues
-
-  const submitForm = (event: FormEvent) => {
-    event.preventDefault();
-    const userFormValues = mapValues(formValues, (value) => value.value) as SignUpUserFormValues;
-    dispatch(setUserFormValues(userFormValues));
+  const submitForm = (values: SignUpUserFormValues) => {
+    dispatch(setUserFormValues(values));
     navigate('/more-info');
   }
 
@@ -80,7 +40,7 @@ export const SignUp = () => {
         height: '100%',
         width: '100%',
       }}
-      onSubmit={submitForm}
+      onSubmit={handleSubmit(submitForm)}
     >
       <SignUpCard
         content={<>
@@ -93,62 +53,63 @@ export const SignUp = () => {
             color="text.primary"
             gutterBottom
           >
-            Sign Up
+            {t('page:signUp:label')}
           </Typography>
+          <Box sx={{ gap: 2, display: 'flex', flexDirection: 'column' }}>
             <TextField
               id="first-name-field"
-              label="First Name"
+              label={t('form:name:label')}
               variant="outlined"
               type="text"
-              value={formValues.name.value}
-              error={!!formValidationErrors.name}
-              helperText={formValidationErrors.name || ' '}
-              onChange={setValue('name')}
               required
+              {...register('name')}
+              error={!!errors.name?.message}
+              helperText={errors.name?.message}
             />
             <TextField
               id="email-field"
-              label="Email"
+              label={t('form:email:label')}
               variant="outlined"
               type="email"
-              value={formValues.email.value}
-              error={!!formValidationErrors.email}
-              helperText={formValidationErrors.email || ' '}
-              onChange={setValue('email')}
               required
+              {...register('email')}
+              error={!!errors.email?.message}
+              helperText={errors.email?.message}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <EmailRounded />
+                    <IconButton disabled>
+                      <EmailRounded />
+                    </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
             <TextField
               id="password-field"
-              label="Password"
+              label={t('form:password:label')}
               variant="outlined"
-              type="password"
-              value={formValues.password.value}
-              error={!!formValidationErrors.password}
-              helperText={formValidationErrors.password || ' '}
-              onChange={setValue('password')}
+              type={seePassword ? 'text' : 'password'}
               required
+              {...register('password')}
+              error={!!errors.password?.message}
+              helperText={errors.password?.message}
               InputProps={{
                 endAdornment: (
                   <InputAdornment position="end">
-                    <LockRounded />
+                    <IconButton onClick={() => setSeePassword(!seePassword)}>
+                      {seePassword ? <VisibilityOff /> : <Visibility />}
+                    </IconButton>
                   </InputAdornment>
                 ),
               }}
             />
-            {/*
-              Do we want a confirm password field, or would a hypothentical password recovery
-              system cover any mistakes?
-            */}
+          </Box>
         </>}
         actions={<>
-          <Button variant="contained" type="submit" disabled={invalidForm}>Next</Button>
+          <Button variant="contained" type="submit" disabled={!formState.isValid}>
+            {t('common:next')}
+          </Button>
         </>}
       />
     </form>

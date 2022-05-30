@@ -1,6 +1,6 @@
 import { Box, Button, Card, CardActions, CardContent, Modal, Typography } from '@mui/material';
 import { forwardRef, Ref, useImperativeHandle, useState } from 'react';
-import terms from '../terms';
+import { useTranslation } from 'react-i18next';
 
 export interface TermsAndConditionsRef {
   setOpenTerms: React.Dispatch<React.SetStateAction<boolean>>
@@ -9,6 +9,8 @@ export interface TermsAndConditionsRef {
 export const TermsAndConditions = forwardRef((_: {}, ref: Ref<TermsAndConditionsRef>) => {
   const [openTerms, setOpenTerms] = useState(false);
   useImperativeHandle(ref, () => ({ setOpenTerms }));
+  const { t } = useTranslation();
+
   return (
     <Modal
       open={openTerms}
@@ -39,11 +41,11 @@ export const TermsAndConditions = forwardRef((_: {}, ref: Ref<TermsAndConditions
           }}
         >
           <Typography id="modal-modal-title" variant="h6" component="h2">
-            Terms & Conditions
+            {t('form:terms:label')}
           </Typography>
           <Box sx={{ mt: 2, overflowY: 'auto', flex: 1 }}>
             <Typography id="modal-modal-description" sx={{ whiteSpace: 'pre-wrap' }}>
-              {terms}
+            {t('form:terms:value')}
             </Typography>
           </Box>
         </CardContent>
@@ -54,7 +56,9 @@ export const TermsAndConditions = forwardRef((_: {}, ref: Ref<TermsAndConditions
             justifyContent: 'end',
           }}
         >
-          <Button onClick={() => setOpenTerms(false)}>Close</Button>
+          <Button onClick={() => setOpenTerms(false)}>
+            {t('common:close')}
+          </Button>
         </CardActions>
       </Card>
     </Modal>

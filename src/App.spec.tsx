@@ -1,17 +1,16 @@
-import React from 'react';
 import { cleanup, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { store } from './app/store';
-import App from './App';
-import { BrowserRouter, Navigate, useNavigate } from 'react-router-dom';
+import App from './app';
+import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material';
 import { theme } from './app/theme';;
-import { resetSignUp, singUpAsync } from './features/sign-up/sign-up.slice';
-import { SignupResult } from './pages/sign-up-result';
-import { RequireSignUp } from './components/require-sign-up';
+import { resetSignUp, signUpAsync } from './features/sign-up/sign-up.slice';
 import { act } from 'react-dom/test-utils';
 
-describe('app', () => {
+jest.mock('@mui/material');
+
+describe('App', () => {
   afterEach(() => {
       cleanup();
   });
@@ -32,7 +31,7 @@ describe('app', () => {
 
   it('renders gaurds the success route', () => {
     store.dispatch({
-      type: singUpAsync.fulfilled.type,
+      type: signUpAsync.fulfilled.type,
       payload: true,
     });
     window.history.pushState({}, '', '/success');
@@ -57,7 +56,7 @@ describe('app', () => {
 
   it('renders gaurds the error route', () => {
     store.dispatch({
-      type: singUpAsync.rejected.type,
+      type: signUpAsync.rejected.type,
       error: { message: 'some error' },
     });
     window.history.pushState({}, '', '/error');

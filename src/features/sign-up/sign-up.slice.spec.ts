@@ -2,7 +2,7 @@ import { RootState } from '../../app/store';
 import {
   signUpReducer,
   SignUpState,
-  singUpAsync,
+  signUpAsync,
   resetSignUp,
   setUserFormValues,
   setUserPrefsValues,
@@ -40,7 +40,7 @@ describe('color reducer', () => {
   });
 
   it('should set signUpStatus to "pending"', async () => {
-    const action = { type: singUpAsync.pending.type };
+    const action = { type: signUpAsync.pending.type };
     const state = signUpReducer(initialState, action);
     expect(state.signUpStatus).toEqual({
       loading: true,
@@ -48,7 +48,7 @@ describe('color reducer', () => {
   })
 
   it('should set signUpStatus to the payload\'s', async () => {
-    const action = { type: singUpAsync.fulfilled.type, payload: true };
+    const action = { type: signUpAsync.fulfilled.type, payload: true };
     const state = signUpReducer(initialState, action);
     expect(state.signUpStatus).toEqual({
       value: true,
@@ -57,7 +57,7 @@ describe('color reducer', () => {
 
   it('should set signUpStatus to the error message', async () => {
     const action = {
-      type: singUpAsync.rejected.type,
+      type: signUpAsync.rejected.type,
       error: { message: 'loading error' },
     };
     const state = signUpReducer(initialState, action);

@@ -17,7 +17,7 @@ const initialState = (): SignUpState => ({
   userPrefsValues: null,
 });
 
-export const singUpAsync = createAsyncThunk<true, SignUp, { state: RootState }>(
+export const signUpAsync = createAsyncThunk<true, SignUp, { state: RootState }>(
   'sign-up/postSignUp',
   async (SignUpData) => await postSignUp(SignUpData),
 );
@@ -35,7 +35,7 @@ export const signUpSlice = createSlice({
     },
   },
   extraReducers: (builder) => {
-    addAsyncResultToState('signUpStatus', singUpAsync, builder);
+    addAsyncResultToState('signUpStatus', signUpAsync, builder);
   }
 })
 
